@@ -189,9 +189,9 @@ export class MIMEMessage {
         const disposition = opts.inline ? 'inline' : 'attachment'
 
         opts.headers = Object.assign({}, opts.headers, {
-            'Content-Type': `${type}; name="${opts.filename}"`,
+            'Content-Type': `${type}; name*=utf-8\'\'${encodeURIComponent(opts.filename)}`,
             'Content-Transfer-Encoding': encoding,
-            'Content-Disposition': `${disposition}; filename="${opts.filename}"`
+            'Content-Disposition': `${disposition}; filename*=utf-8\'\'${encodeURIComponent(opts.filename)}`
         })
 
         return this._addMessage({ data: opts.data, headers: opts.headers })
